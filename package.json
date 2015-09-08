@@ -1,0 +1,17 @@
+{
+  "name": "MailAgency",
+  "description": "Postfix Database admin",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Voffkaa/MaiAgency.git"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "log4js": "^0.6.26",
+    "nconf": "^0.7.2"
+  },
+  "devDependencies": {}
+}

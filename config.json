@@ -1,0 +1,35 @@
+{
+
+  "logs": {
+
+    /* http://stritti.github.io/log4js/docu/users-guide.html */
+
+    "level": "DEBUG",
+
+    "requests": {
+      "level": "DEBUG",
+      "format": ":method :url :status (:response-time ms)"
+    },
+
+    "sqlQueries": false
+  },
+
+  "appDatabase": {
+    "host": "localhost",
+    "port": 5432,
+    "ssl": false,
+    "database": "<dbname>",
+    "user": "<user>",
+    "password": "<password>"
+  },
+
+  "server": {
+    "host": "localhost",
+    "port": 3000
+    // "path": "<socket>"
+  },
+
+  "isBehindProxy": true,
+  "jwtSecret": "<secret>"
+
+}
