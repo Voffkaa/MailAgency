@@ -7,11 +7,17 @@
     "url": "https://github.com/Voffkaa/MaiAgency.git"
   },
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.13.3",
+    "bookshelf": "^0.8.2",
     "express": "^4.13.3",
+    "knex": "^0.8.6",
     "lodash": "^3.10.1",
     "log4js": "^0.6.26",
-    "nconf": "^0.7.2"
+    "nconf": "^0.8.0",
+    "pg": "^4.4.2",
+    "underscore": "^1.8.3",
+    "validator": "^4.0.6"
   },
   "devDependencies": {}
 }

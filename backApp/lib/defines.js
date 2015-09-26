@@ -24,5 +24,6 @@ module.exports.CONFIG_OPTIONS = {
     LOGS: 'logs',
     SERVER: 'server',
     IS_BEHIND_PROXY: 'isBehindProxy',
-    JWT_SECRET: 'jwtSecret'
+    JWT_SECRET: 'jwtSecret',
+    BCRYPT_ROUNDS_NUMBER: 'bcryptRoundsNumber'
 };

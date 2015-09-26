@@ -30,6 +30,7 @@
   },
 
   "isBehindProxy": true,
-  "jwtSecret": "<secret>"
+  "jwtSecret": "<secret>",
+  "bcryptRoundsNumber": 12
 
 }

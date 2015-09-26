@@ -39,8 +39,7 @@ app.use(function (err, req, res, next) {
             app.log.error("ServerError stack: ", err.stack);
         }
 
-        app.log.error("ServerError message: ", err.message);
-        app.log.error("ServerError responseCode: ", err.responseCode);
+        app.log.error("ServerError responseCode: %s, message: ", err.responseCode, err.message);
 
         res.status(err.responseCode);
         res.sendAnswer({message: err.message});
