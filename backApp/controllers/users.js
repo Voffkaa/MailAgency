@@ -2,12 +2,23 @@
 
 var _ = require('underscore');
 
-//var password = require(__dirname + '/../lib/password');
+var password = require(__dirname + '/../lib/password');
 
 var UserModel = require(__dirname + '/../models/user');
 
 module.exports.readAll = function() {
     return UserModel.forge().fetchAll();
+};
+
+module.exports.createUser = function(email, plainTextPassword) {
+
+    return password.encryptPassword(plainTextPassword)
+        .then(function(hash) {
+            var u = new UserModel({email: email, passwordHash: hash});
+
+            return u.save(null, {method: 'insert'});
+        });
+
 };
 
 //module.exports.read = function(userId, require) {

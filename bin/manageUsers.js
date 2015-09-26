@@ -3,6 +3,7 @@
 
 var _ = require('underscore');
 var validator = require('validator');
+var Promise = require('bluebird');
 
 var def = require(__dirname + '/../backApp/lib/defines');
 var password = require(__dirname + '/../backApp/lib/password');
@@ -24,15 +25,21 @@ function listUsers() {
 
             _.each(list.models, function(u) {
 
-                console.log("#%d: %s: \t%s", i, u.get('id'), u.get('email'));
+                console.log("#%d: %s:\t%s:\t%s",
+                    i,
+                    u.get('id'),
+                    u.get('email'),
+                    u.get('isSuperuser') ? "superuser": "user");
                 i++;
 
             });
 
-            console.log("Total: ", list.length);
+            return list.length;
 
+        })
+        .then(function(usersNumber) {
+            console.log("Total: ", usersNumber);
             process.exit(def.EXIT_CODE.OK);
-
         })
         .catch(function(err) {
                 console.log(err);
@@ -199,6 +206,7 @@ if(cmd) {
 
 } else {
     console.log("No command specified");
-    console.log("Usage: manageUsers <command> <email> [<password>]");
+    console.log("Usage: manageUsers list");
+    console.log("Usage: manageUsers add <email> [<password>]");
     process.exit(def.EXIT_CODE.OK);
 }
