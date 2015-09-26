@@ -21,18 +21,27 @@ module.exports.createUser = function(email, plainTextPassword) {
 
 };
 
-//module.exports.read = function(userId, require) {
-//
-//    var r = require || true;
-//
-//    return UserModel.forge()
-//        .where({id: userId})
-//        .fetch({
-//            require: r,
-//            withRelated: ['permissions', 'organization', 'department', 'post']
-//        })
-//};
-//
+module.exports.read = function(email) {
+
+    return UserModel.forge()
+        .where({email: email})
+        .fetch({require: true});
+
+};
+
+module.exports.setSuperuser = function(email, isSuperuser) {
+
+    return this.read(email)
+        .then(function(u) {
+
+            u.set('isSuperuser', isSuperuser);
+
+            return u.save();
+        });
+
+};
+
+
 //module.exports.authenticate = function(email, plainTextPassword) {
 //    return UserModel.forge().where({email: email}).fetch({columns: ['id', 'passwordHash']})
 //        .then(function(user) {

@@ -71,13 +71,6 @@ module.exports.readPassword = function(query) {
     });
 };
 
-//module.exports.encryptPasswordSync = function(plainText) {
-//
-//    var salt = bcrypt.genSaltSync(roundsNumber);
-//
-//    return bcrypt.hashSync(plainText, salt);
-//};
-//
 //module.exports.checkPassword = function(plainText, hash) {
 //    return new Promise(function(resolve, reject) {
 //

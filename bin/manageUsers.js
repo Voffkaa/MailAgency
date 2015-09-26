@@ -78,6 +78,34 @@ function addUser() {
     }
 
 }
+
+function setSuperuser() {
+
+    var email = process.argv[3];
+    var onOff = process.argv[4];
+
+    if(!validator.isEmail(email, {allow_utf8_local_part: false})) {
+        console.log("Invalid email");
+        process.exit(def.EXIT_CODE.INVALID_ARGUMENT);
+    } else if(!validator.isIn(onOff, ["on", "off"])) {
+        console.log("Invalid state argument");
+        process.exit(def.EXIT_CODE.INVALID_ARGUMENT);
+    } else {
+
+        UsersController.setSuperuser(email, onOff === "on")
+            .then(function() {
+                console.log("User changed");
+                process.exit(def.EXIT_CODE.OK);
+            })
+            .catch(function(err) {
+                console.log(err);
+                process.exit(def.EXIT_CODE.EXECUTION_ERROR);
+            });
+
+    }
+
+}
+
 //
 //function removeUser() {
 //
@@ -195,8 +223,9 @@ function addUser() {
 
 if(cmd) {
     switch(cmd) {
-        case 'list': listUsers(); break;
-        case 'add': addUser(); break;
+        case 'listUsers': listUsers(); break;
+        case 'addUser': addUser(); break;
+        case 'setSuperuser': setSuperuser(); break;
         //case 'remove': removeUser(); break;
         //case 'passwd': setUserPassword(); break;
         //case 'check': checkUserPassword(); break;
@@ -206,7 +235,8 @@ if(cmd) {
 
 } else {
     console.log("No command specified");
-    console.log("Usage: manageUsers list");
-    console.log("Usage: manageUsers add <email> [<password>]");
+    console.log("Usage: manageUsers listUsers");
+    console.log("Usage: manageUsers addUser <email> [<password>]");
+    console.log("Usage: manageUsers setSuperuser <email> on|off");
     process.exit(def.EXIT_CODE.OK);
 }
