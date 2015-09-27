@@ -1,0 +1,70 @@
+doctype html
+
+html(lang="en")
+
+    head
+
+        meta(charset="utf8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
+
+        title MailAgency Login
+
+        script(type='text/javascript').
+
+            window.onload = function() {
+
+                var loginButton = document.getElementById('loginButton');
+                var statusMessage = document.getElementById('statusMessage');
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.timeout = #{authTimeout};
+
+                xhr.onloadstart = function() {
+                    loginButton.disabled = true;
+                    statusMessage.innerHTML = "Logging in...";
+                };
+
+                xhr.ontimeout = function() {
+                    loginButton.enabled = true;
+                    statusMessage.innerHTML = "Server answer timeout";
+                };
+
+                xhr.onerror = function() {
+
+                    loginButton.enabled = true;
+                    statusMessage.innerHTML = "Error";
+
+                };
+
+                xhr.onload = function() {
+
+                    console.log("Got answer");
+
+                    if(xhr.status === 200) {
+
+                    }
+
+                };
+
+                loginButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    xhr.open('POST', '#{authUrl}', true);
+                    xhr.send({test: 'blabla'});
+
+                });
+
+            };
+
+    body
+
+        h1 MailAgency Login
+
+        form#formLogin(method='POST', name='formLogin')
+
+            input#email(name='email', type='email', placeholder='email', required, autofocus)
+            input#password(name='password', type='password', placeholder='password', required)
+            button#loginButton(type='submit') Log in
+
+        #statusMessage

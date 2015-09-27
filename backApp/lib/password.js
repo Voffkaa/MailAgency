@@ -71,17 +71,24 @@ module.exports.readPassword = function(query) {
     });
 };
 
-//module.exports.checkPassword = function(plainText, hash) {
-//    return new Promise(function(resolve, reject) {
-//
-//        bcrypt.compare(plainText, hash, function(err, res) {
-//
-//            if(err) {
-//                reject(err);
-//            } else {
-//                resolve(res);
-//            }
-//        });
-//
-//    });
-//};
+module.exports.checkPassword = function(plainText, hash) {
+    return new Promise(function(resolve, reject) {
+
+        bcrypt.compare(plainText, hash, function(err, res) {
+
+            if(err) {
+                reject(err);
+            } else {
+                resolve(res);
+            }
+        });
+
+    });
+};
+
+module.exports.encryptPasswordSync = function(plainText) {
+
+    var salt = bcrypt.genSaltSync(roundsNumber);
+
+    return bcrypt.hashSync(plainText, salt);
+};

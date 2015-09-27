@@ -31,6 +31,9 @@
 
   "isBehindProxy": true,
   "jwtSecret": "<secret>",
-  "bcryptRoundsNumber": 12
+  "cookieSecret": "<secret>",
+  "bcryptRoundsNumber": 12,
+
+  "staticDir" : "<path>"
 
 }

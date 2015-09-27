@@ -21,22 +21,22 @@ module.exports.createUser = function(email, plainTextPassword) {
 
 };
 
-module.exports.read = function(email) {
+module.exports.readUser = function(email) {
 
     return UserModel.forge()
         .where({email: email})
-        .fetch({require: true});
+        .fetch({require: r});
 
 };
 
 module.exports.setSuperuser = function(email, isSuperuser) {
 
-    return module.exports.read(email)
+    return module.exports.readUser(email)
         .then(function(u) {
 
             u.set('isSuperuser', isSuperuser);
 
-            return u.save();
+            return u.save(null, {method: 'update'});
         });
 
 };
@@ -52,13 +52,36 @@ module.exports.setUserPassword = function(email, plainTextPassword) {
     return password.encryptPassword(plainTextPassword)
         .then(function(hash) {
 
-            return module.exports.read(email)
+            return module.exports.readUser(email)
                 .then(function(u) {
 
                     u.set('passwordHash', hash);
 
-                    return u.save();
+                    return u.save(null, {method: 'update'});
                 });
         });
 
+};
+
+module.exports.authenticateUser = function(email, plainTextPassword) {
+    // Not "read" method because of require: false
+    return UserModel.forge()
+        .where({email: email})
+        .fetch({require: false})
+        .then(function(user) {
+
+            if(_.isNull(user)) {
+                return false;
+            }
+
+            var hash = user.get('passwordHash');
+
+            return password.checkPassword(plainTextPassword, hash)
+                .then(function(isValidPassword) {
+
+                    return isValidPassword ? user : false;
+
+                });
+
+        });
 };

@@ -162,64 +162,25 @@ function setUserPassword() {
 
 }
 
-//function checkUserPassword() {
-//
-//    var email = process.argv[3];
-//
-//    if(!validator.isEmail(email, {allow_utf8_local_part: false})) {
-//        console.log("Invalid email");
-//        process.exit(def.EXIT_CODE.INVALID_ARGUMENT);
-//    } else {
-//
-//        var pwd = process.argv[4];
-//
-//        var actionPromise = (_.isEmpty(pwd)) ? password.readPassword("Enter password: ") : Promise.resolve(pwd);
-//
-//        actionPromise
-//            .then(function(p) {
-//
-//                return UsersController.checkUserPassword(email, p);
-//
-//            })
-//            .then(function(res) {
-//
-//                if(res) {
-//                    console.log("Valid password");
-//                } else {
-//                    console.log("Invalid password");
-//                }
-//
-//                process.exit(def.EXIT_CODE.OK);
-//            })
-//            .catch(function(err) {
-//                console.log(err);
-//                process.exit(def.EXIT_CODE.EXECUTION_ERROR);
-//            });
-//
-//    }
-//
-//}
-//
-//function hashString() {
-//
-//    var pwd = process.argv[3];
-//
-//    var actionPromise = (_.isEmpty(pwd)) ? password.readPassword("Enter password: ") : Promise.resolve(pwd);
-//
-//    actionPromise
-//        .then(function(p) {
-//
-//            console.log("Password hash: \"%s\"", password.encryptPasswordSync(p));
-//
-//            process.exit(def.EXIT_CODE.OK);
-//
-//        })
-//        .catch(function(err) {
-//            console.log(err);
-//            process.exit(def.EXIT_CODE.EXECUTION_ERROR);
-//        });
-//
-//}
+function hashPassword() {
+
+    var pwd = process.argv[3];
+
+    var actionPromise = (_.isEmpty(pwd)) ? password.readPassword("Enter password: ") : Promise.resolve(pwd);
+
+    actionPromise
+        .then(function(p) {
+
+            console.log("Password hash: \"%s\"", password.encryptPasswordSync(p));
+
+            process.exit(def.EXIT_CODE.OK);
+
+        })
+        .catch(function(err) {
+            console.log(err);
+            process.exit(def.EXIT_CODE.EXECUTION_ERROR);
+        });
+}
 
 if(cmd) {
     switch(cmd) {
@@ -228,6 +189,7 @@ if(cmd) {
         case 'setSuperuser': setSuperuser(); break;
         case 'deleteUser': deleteUser(); break;
         case 'setPassword': setUserPassword(); break;
+        case 'hashPassword': hashPassword(); break;
         default: console.log("Unknown command"); process.exit(def.EXIT_CODE.INVALID_ARGUMENT);
     }
 
@@ -238,5 +200,6 @@ if(cmd) {
     console.log("Usage: manageUsers setSuperuser <email> on|off");
     console.log("Usage: manageUsers deleteUser <email>");
     console.log("Usage: manageUsers setPassword <email> [<password>]");
+    console.log("Usage: manageUsers hashPassword <password>");
     process.exit(def.EXIT_CODE.OK);
 }

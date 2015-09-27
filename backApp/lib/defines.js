@@ -16,7 +16,8 @@ module.exports.RESPONSE_CODES = {
     FORBIDDEN: 403,
     NOT_FOUND: 404,
     SERVER_ERROR: 500,
-    API_ERROR: 597
+    API_ERROR: 597,
+    BACKEND_ERROR: 596
 };
 
 module.exports.CONFIG_OPTIONS = {
@@ -25,5 +26,17 @@ module.exports.CONFIG_OPTIONS = {
     SERVER: 'server',
     IS_BEHIND_PROXY: 'isBehindProxy',
     JWT_SECRET: 'jwtSecret',
-    BCRYPT_ROUNDS_NUMBER: 'bcryptRoundsNumber'
+    COOKIE_SECRET: 'cookieSecret',
+    BCRYPT_ROUNDS_NUMBER: 'bcryptRoundsNumber',
+    STATIC_DIR: 'staticDir'
 };
+
+module.exports.AUTH_URL = '/auth/session';
+module.exports.AUTH_TIMEOUT = 16000;
+
+module.exports.PASSWORD_LENGTH_RANGE = {
+    MIN: 3,
+    MAX: 16
+};
+
+module.exports.MAXIMAL_EMAIL_LENGTH = 64;
