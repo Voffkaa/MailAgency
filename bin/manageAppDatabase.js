@@ -3,7 +3,7 @@
 
 var fs = require('fs');
 
-var def = require(__dirname + '/../backApp/lib/defines');
+var def = require(__dirname + '/../defines');
 var knex = require(__dirname + '/../backApp/lib/knex');
 
 console.log("MailAgency Application database utility");

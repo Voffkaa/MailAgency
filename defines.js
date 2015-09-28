@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.PATH_TO_CONF = __dirname + '/../../';
+module.exports.PATH_TO_CONF = __dirname + '/';
 
 module.exports.EXIT_CODE = {
     OK: 0,
@@ -41,3 +41,5 @@ module.exports.PASSWORD_LENGTH_RANGE = {
 };
 
 module.exports.MAXIMAL_EMAIL_LENGTH = 64;
+
+module.exports.FRONTAPP_NAME = 'app.js';

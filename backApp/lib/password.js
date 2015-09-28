@@ -2,8 +2,9 @@
 
 var readline = require('readline');
 var bcrypt = require('bcrypt');
+var Promise = require('bluebird');
 
-var def = require(__dirname + '/defines');
+var def = require(__dirname + '/../../defines');
 var config = require(__dirname + '/config');
 
 var readlineInterface = readline.createInterface({

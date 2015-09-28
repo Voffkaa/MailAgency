@@ -1,6 +1,6 @@
 'use strict';
 
-var def = require(__dirname + '/defines');
+var def = require(__dirname + '/../../defines');
 
 // TODO: Generate functions
 

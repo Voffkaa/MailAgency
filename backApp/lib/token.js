@@ -3,7 +3,7 @@
 var jwt = require('jsonwebtoken');
 var Promise = require('bluebird');
 
-var def = require(__dirname + '/defines');
+var def = require(__dirname + '/../../defines');
 var config = require(__dirname + '/config');
 
 var jwtSecret = config.get(def.CONFIG_OPTIONS.JWT_SECRET);

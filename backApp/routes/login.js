@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-var def = require(__dirname + '/../lib/defines');
+var def = require(__dirname + '/../../defines');
 
 var login = express.Router({
     caseSensitive: true,

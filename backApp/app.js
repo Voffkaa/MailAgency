@@ -8,7 +8,7 @@ express.response.sendAnswer = function(answer) {
     this.json(answer);
 };
 
-var def = require(__dirname + '/lib/defines');
+var def = require(__dirname + '/../defines');
 var config = require(__dirname + '/lib/config');
 var logger = require(__dirname + '/lib/logger');
 var ServerError = require(__dirname + '/lib/error').ServerError;

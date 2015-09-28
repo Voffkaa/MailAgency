@@ -2,7 +2,7 @@
 
 var nconf = require('nconf');
 
-var def = require(__dirname + '/defines');
+var def = require(__dirname + '/../../defines');
 
 nconf.env();
 

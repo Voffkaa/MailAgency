@@ -1,7 +1,7 @@
 'use strict';
 
 var app = require(__dirname + '/../backApp/app');
-var def = require(__dirname + '/../backApp/lib/defines');
+var def = require(__dirname + '/../defines');
 
 var server = app.listen(app.config.get(def.CONFIG_OPTIONS.SERVER), function() {
 

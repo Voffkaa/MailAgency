@@ -4,7 +4,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var validator = require('validator');
 
-var def = require(__dirname + '/defines');
+var def = require(__dirname + '/../../defines');
 var BackendError = require(__dirname + '/error').BackendError;
 var logger = require(__dirname + '/logger').getLogger('[lib: passport]');
 var token = require(__dirname + '/token');

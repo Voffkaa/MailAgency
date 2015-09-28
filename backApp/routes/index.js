@@ -2,7 +2,7 @@
 
 var express = require('express');
 
-var def = require(__dirname + '/../lib/defines');
+var def = require(__dirname + '/../../defines');
 var config = require(__dirname + '/../lib/config');
 
 var index = express.Router({
