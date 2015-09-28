@@ -11,20 +11,20 @@ var auth = express.Router({
 
 auth.post('/session', passport.authenticateLocal);
 
-//auth.delete('/session', function(req, res, next) {
-//
-//    var sc = req.signedCookies;
-//
-//    if(sc['sessionId']) {
-//
-//        res.clearCookie('sessionId');
-//
-//        res.sendAnswer({});
-//
-//    } else {
-//        next();
-//    }
-//
-//});
+auth.delete('/session', function(req, res, next) {
+
+    var sc = req.signedCookies;
+
+    if(sc['sessionId']) {
+
+        res.clearCookie('sessionId');
+
+        res.sendAnswer({});
+
+    } else {
+        next();
+    }
+
+});
 
 module.exports = auth;

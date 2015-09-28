@@ -1,11 +1,9 @@
 'use strict';
 
 var express = require('express');
-var validator = require('validator');
 
 var def = require(__dirname + '/../lib/defines');
 var config = require(__dirname + '/../lib/config');
-var logger = require(__dirname + '/../lib/logger').getLogger('[routes: index]');
 
 var index = express.Router({
     caseSensitive: true,
@@ -18,7 +16,10 @@ index.get('*', function (req, res, next) {
 
     if(sc['sessionId']) {
 
-        res.render('index');
+        res.render('index', {
+            authUrl: def.AUTH_URL,
+            authTimeout: def.AUTH_TIMEOUT
+        });
 
     } else {
         res.cookie('originalUrl', req.originalUrl, {
