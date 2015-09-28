@@ -33,6 +33,7 @@ module.exports.CONFIG_OPTIONS = {
 
 module.exports.AUTH_URL = '/auth/session';
 module.exports.AUTH_TIMEOUT = 16000;
+module.exports.ORIGINAL_URL_COOKIE_MAX_AGE = 60000;
 
 module.exports.PASSWORD_LENGTH_RANGE = {
     MIN: 3,

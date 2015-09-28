@@ -15,6 +15,8 @@ html(lang="en")
 
                 var loginButton = document.getElementById('loginButton');
                 var statusMessage = document.getElementById('statusMessage');
+                var emailInput = document.getElementById('email');
+                var passwordInput = document.getElementById('password');
 
                 var xhr = new XMLHttpRequest();
 
@@ -39,10 +41,45 @@ html(lang="en")
 
                 xhr.onload = function() {
 
-                    console.log("Got answer");
+                    var answer = JSON.parse(xhr.responseText);
 
-                    if(xhr.status === 200) {
+                    if(xhr.status !== 200) {
 
+
+                        statusMessage.innerHTML = "Error code: " + xhr.status
+                                + " Message: " + answer.message;
+                        loginButton.disabled = false;
+
+                    } else {
+                        statusMessage.innerHTML = "Ok";
+                        loginButton.disabled = false;
+
+                        localStorage.setItem('access_token', answer.access_token);
+
+                        function getCookie(cookieName) {
+
+                            var ca = document.cookie.split(';');
+
+                            var a = cookieName + '=';
+
+                            var r = null;
+
+                            ca.forEach(function(c) {
+
+                                if(c.indexOf(a) === 0) {
+
+                                    r = c.substring(a.length);
+
+                                }
+
+                            });
+
+                            return r ? decodeURIComponent(r) : r;
+                        }
+
+                        var ou = getCookie('originalUrl');
+
+                        location.replace(ou ? ou : "/");
                     }
 
                 };
@@ -51,7 +88,11 @@ html(lang="en")
                     e.preventDefault();
 
                     xhr.open('POST', '#{authUrl}', true);
-                    xhr.send({test: 'blabla'});
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.send(JSON.stringify({
+                        email: emailInput.value,
+                        password: passwordInput.value
+                    }));
 
                 });
 

@@ -16,6 +16,7 @@ var BackendError = require(__dirname + '/lib/error').BackendError;
 
 var authRoute = require(__dirname + '/routes/auth');
 var loginRoute = require(__dirname + '/routes/login');
+var indexRoute = require(__dirname + '/routes/index');
 
 var app = express();
 
@@ -44,6 +45,7 @@ if(staticDir) {
 
 app.use('/auth', authRoute);
 app.use('/login', loginRoute);
+app.use('/', indexRoute);
 
 app.use(function (req, res, next) {
     next(new ServerError("Not found: " + req.path, def.RESPONSE_CODES.NOT_FOUND));
