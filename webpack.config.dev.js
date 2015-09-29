@@ -1,4 +1,3 @@
-var webpack = require('webpack');
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
 var envSuffix = process.env.NODE_ENV ? '.' + process.env.NODE_ENV : '.';
@@ -12,6 +11,8 @@ var staticDir = config.staticDir || __dirname + '/static';
 console.log("Output dir: ", staticDir);
 
 module.exports = {};
+module.exports.module = {};
+module.exports.resolve = {};
 
 module.exports.output = {
         path: staticDir,
@@ -19,9 +20,24 @@ module.exports.output = {
 };
 
 module.exports.entry = {
-    vendors: ["jquery", "underscore", "backbone"]
+    dashboard: 'dashboard/logout.js',
+    vendors: [
+        'jquery',
+        'underscore',
+        'backbone'
+    ]
 };
 
 module.exports.plugins = [
-    new CommonsChunkPlugin("vendors", "vendors.js")
+    new CommonsChunkPlugin('vendors', 'vendors.js')
 ];
+
+module.exports.module.loaders = [
+    {
+        test: /\.js?$/,
+        loader: 'babel-loader',
+        exclude: /(node_modules)/
+    }
+];
+
+module.exports.resolve.root = [__dirname + '/frontApp'];

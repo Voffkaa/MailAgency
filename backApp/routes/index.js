@@ -17,7 +17,7 @@ index.get('*', function (req, res, next) {
     if(sc['sessionId']) {
 
         res.render('index', {
-            authUrl: def.AUTH_URL,
+            authUrl:     def.AUTH_URL,
             authTimeout: def.AUTH_TIMEOUT
         });
 
