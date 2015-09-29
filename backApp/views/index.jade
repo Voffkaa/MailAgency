@@ -17,13 +17,17 @@ html(lang="en")
             window.options.dashboard.authTimeout = '#{authTimeout}'
             window.options.dashboard.authUrl = '#{authUrl}'
 
-        script(src='/static/vendors.js', type='text/javascript')
-        script(src='/static/app.js', type='text/javascript')
+        link(href='/static/app.css', rel='stylesheet')
 
     body
+
+        #mainWindow
 
         h1 MailAgency Index
 
         button#logoutButton(type='submit') Log out
 
         #statusMessage
+
+        script(src='/static/vendors.js', type='text/javascript')
+        script(src='/static/app.js', type='text/javascript')
