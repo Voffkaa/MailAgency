@@ -10,7 +10,7 @@ var index = express.Router({
     strict: true
 });
 
-index.get('*', function (req, res, next) {
+index.get('*', function (req, res) {
 
     var sc = req.signedCookies;
 

@@ -1,6 +1,7 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+var ProvidePlugin = require("webpack/lib/ProvidePlugin");
 
 var envSuffix = process.env.NODE_ENV ? '.' + process.env.NODE_ENV : '.';
 var configFileName = './config' + envSuffix + '.json';
@@ -22,21 +23,26 @@ module.exports.output = {
 };
 
 module.exports.entry = {
-    dashboard: [
-        'dashboard/logout.js',
-        'dashboard/navbar.jsx'
+    views: [
+        'views/mainWindow.jsx'
     ],
     vendors: [
+        'jquery',
         'underscore',
         'backbone',
         'react',
-        'react-bootstrap'
+        'bootstrap'
     ]
 };
 
 module.exports.plugins = [
     new CommonsChunkPlugin('vendors', 'vendors.js'),
-    new ExtractTextPlugin('app.css', { allChunks: true })
+    new ExtractTextPlugin('app.css', { allChunks: true }),
+    new ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery"
+    })
 ];
 
 module.exports.module.loaders = [
@@ -62,5 +68,6 @@ module.exports.module.loaders = [
 
 module.exports.resolve.root = [__dirname + '/frontApp'];
 module.exports.resolve.alias = {
+    'jquery': __dirname + '/node_modules/jquery',
     'react': __dirname + '/node_modules/react'
 };
